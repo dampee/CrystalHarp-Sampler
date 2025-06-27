@@ -103,11 +103,17 @@ main {
 }
 
 .parameter label {
-  font-weight: 500;
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.025em;
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.parameter label small {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.75em;
+  opacity: 0.8;
 }
 
 .parameter input[type="range"] {
@@ -315,6 +321,30 @@ main {
 .attribution strong {
   color: var(--text-primary);
   font-weight: 600;
+}
+
+/* Consistency mode checkbox */
+.consistency-mode {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--surface-light);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border);
+}
+
+.consistency-mode label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.consistency-mode input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-color);
 }
 
 /* Responsive design */

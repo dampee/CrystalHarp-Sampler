@@ -85,15 +85,25 @@ git push origin main
 
 1. **Start Audio Context**: Click the "Start Audio Context" button to initialize the audio system
 2. **Adjust Parameters**: Use the sliders to modify the CrystalHarp synthesizer parameters:
-   - **Attack Noise**: Controls the initial noise burst (0-1)
-   - **Dampening**: Controls string dampening frequency (1000-10000 Hz)
-   - **Resonance**: Controls string resonance (0-0.99)
-   - **Release**: Controls note release time (0.1-5 seconds)
-   - **Delay Time**: Controls delay effect timing (0-1 seconds)
-   - **Delay Feedback**: Controls delay feedback amount (0-0.9)
+
+   - **Attack Noise**: Controls the initial pluck noise burst (0.01-1) - _PluckSynth mode only_
+   - **Dampening**: Controls string dampening frequency (1000-10000 Hz) - _PluckSynth mode only_
+   - **Resonance**: Controls string resonance (0-0.99) - _PluckSynth mode only_
+   - **Release**: Controls note release time (0.1-5 seconds) - _Available in both modes_
+   - **Delay Time**: Controls delay effect timing (0-1 seconds) - _Available in both modes_
+   - **Delay Feedback**: Controls delay feedback amount (0-0.9) - _Available in both modes_
+   - **Output Volume**: Controls final output level (0-2x gain) - _Available in both modes_
+
+   > **Note**: Parameters are automatically shown/hidden based on the current synth mode for clarity.
+
 3. **Play Notes**: Select a note and click "Play Note" to hear the current sound
-4. **Generate Samples**: Set sample length and click "Generate Sample" to create audio using offline rendering
-5. **Download**: Click "Download Sample" to save the generated audio file (.wav format)
+4. **Continuous Play**: Use "Continuous Play" for hands-free parameter tweaking (plays every 3 seconds)
+5. **Consistent Mode**:
+   - **Enabled (default)**: Uses DeterministicPluckSynth - identical PluckSynth-like sounds every time
+   - **Disabled**: Uses PluckSynth with natural Karplus-Strong variation for organic sound
+6. **Generate Samples**: Set sample length and click "Generate & Download Sample" to create and download audio files
+
+> **Technical Note**: PluckSynth uses the Karplus-Strong algorithm which includes inherent randomness in the noise source for natural pluck variation. The "Consistent Mode" (default) uses a custom DeterministicPluckSynth that replicates the Karplus-Strong algorithm but with a deterministic noise source, ensuring identical sounds on every trigger while maintaining the characteristic pluck timbre. All sound parameters are available in both modes.
 
 ## 🎹 CrystalHarp Synthesizer
 
@@ -110,17 +120,62 @@ const crystalHarp = new Tone.PluckSynth({
 
 This creates a beautiful, crystalline harp-like sound perfect for ambient music, sound design, and musical production.
 
+## 🎛️ Synthesizer Parameters
+
+All synthesizer parameters work in both standard and consistent modes:
+
+- **Attack Noise**: Controls the duration of the initial noise burst. Higher values create a longer "pluck" sound at the beginning.
+
+- **Dampening**: Controls the brightness of the sound by adjusting the lowpass filter cutoff frequency. Lower values create darker, more muffled tones while higher values create brighter sounds.
+
+- **Resonance**: Controls how much energy is preserved in the feedback loop. Higher values create longer sustain and more pronounced harmonic content.
+
+- **Release**: Controls how quickly the sound decays after the initial attack. Lower values create short, percussive sounds while higher values create longer sustained notes.
+
+### 🔬 Deterministic Mode Technical Details
+
+The "Consistent Mode" implements a custom `DeterministicPluckSynth` class that solves the inherent randomness in Tone.js's PluckSynth. Here's how:
+
+**The Problem**: Tone.js PluckSynth uses the Karplus-Strong algorithm, which includes random noise to simulate natural string variations. The randomness comes from `Math.random()` calls in the noise source that pick different starting positions in the noise buffer on each trigger.
+
+**The Solution**: Our `DeterministicPluckSynth`:
+
+1. Replicates the exact Karplus-Strong chain: Noise → LowpassCombFilter → Output
+2. Uses the same pink noise and comb filter as the original PluckSynth
+3. Eliminates randomness by ensuring the noise source always starts from the same state
+4. Maintains all the characteristic PluckSynth parameters and behavior
+
+**Result**: Identical pluck sounds on every trigger while preserving the unique Karplus-Strong timbre that makes PluckSynth special.
+
+```typescript
+// Custom implementation that maintains PluckSynth's exact signal chain
+class DeterministicPluckSynth {
+  private _noise: Tone.Noise; // Pink noise source
+  private _lfcf: Tone.LowpassCombFilter; // Karplus-Strong filter
+  // ... identical parameter control to PluckSynth
+}
+```
+
 ## 🏗️ Project Structure
 
 ```
 src/
 ├── audio/
-│   ├── SampleGenerator.ts    # Main synthesizer class
-│   └── AudioRecorder.ts      # Audio recording functionality
+│   ├── SampleGenerator.ts    # Main CrystalHarp synthesizer with DeterministicPluckSynth
+│   └── SampleRenderer.ts     # Offline audio rendering for sample generation
 ├── ui/
-│   └── UIController.ts       # UI interaction handling
-├── main.ts                   # Application entry point
-└── style.css                 # Modern UI styles
+│   └── UIController.ts       # UI interaction handling (legacy)
+├── main.ts                   # Application entry point and UI logic
+├── style.css                 # Modern UI styles with CSS variables
+└── vite-env.d.ts            # TypeScript environment definitions
+
+public/
+├── .nojekyll                # Prevents GitHub Pages Jekyll processing
+└── vite.svg                 # Application icon
+
+.github/
+└── workflows/
+    └── deploy.yml           # GitHub Actions deployment workflow
 ```
 
 ## 🎯 Browser Compatibility

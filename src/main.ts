@@ -36,7 +36,7 @@ class App {
             <div class="parameter-grid">
               <div class="parameter">
                 <label for="attackNoise">Attack Noise</label>
-                <input type="range" id="attackNoise" min="0" max="1" step="0.01" value="0.1">
+                <input type="range" id="attackNoise" min="0.01" max="1" step="0.01" value="0.1">
                 <span class="value">0.1</span>
               </div>
               
@@ -87,6 +87,12 @@ class App {
             </div>
             
             <div class="playback-controls">
+              <div class="consistency-mode">
+                <label>
+                  <input type="checkbox" id="consistentMode"> 
+                  🎯 Consistent Mode (fixed noise for identical sound)
+                </label>
+              </div>
               <div class="note-controls">
                 <label for="noteSelect">Note to play:</label>
                 <select id="noteSelect">
@@ -156,6 +162,7 @@ class App {
         generateAndDownloadBtn.disabled = false
         
         this.setupParameterListeners()
+        this.setupConsistentModeListener()
       } catch (error) {
         this.updateStatus('Error starting audio context: ' + error)
       }
@@ -173,10 +180,12 @@ class App {
     toggleContinuousBtn.addEventListener('click', () => {
       if (!isContinuousPlaying) {
         // Start continuous play
-        const noteSelect = document.getElementById('noteSelect') as HTMLSelectElement
-        const note = noteSelect.value
-        
         const playWithPause = () => {
+          // Get current note and parameters each time for consistency
+          const noteSelect = document.getElementById('noteSelect') as HTMLSelectElement
+          const note = noteSelect.value
+          
+          // Ensure we're playing with current synthesizer settings
           this.sampleGenerator.playNote(note)
           this.updateStatus(`Continuous play: ${note}`)
         }
@@ -265,6 +274,53 @@ class App {
         }
       })
     })
+  }
+
+  private setupConsistentModeListener() {
+    const consistentModeCheckbox = document.getElementById('consistentMode') as HTMLInputElement
+    
+    // Set default state to checked (consistent mode enabled by default)
+    consistentModeCheckbox.checked = this.sampleGenerator.getIsConsistentMode()
+    
+    // Initial parameter visibility update
+    this.updateParameterVisibility(consistentModeCheckbox.checked)
+    
+    consistentModeCheckbox.addEventListener('change', () => {
+      this.sampleGenerator.setConsistentMode(consistentModeCheckbox.checked)
+      this.updateParameterVisibility(consistentModeCheckbox.checked)
+      
+      if (consistentModeCheckbox.checked) {
+        this.updateStatus('Consistent mode enabled - using DeterministicPluckSynth for identical sounds')
+      } else {
+        this.updateStatus('Consistent mode disabled - using PluckSynth with natural variation')
+      }
+    })
+  }
+
+  private updateParameterVisibility(isConsistentMode: boolean) {
+    // All parameters work in both modes, but we update the labels to reflect the current mode
+    const allParams = ['attackNoise', 'dampening', 'resonance', 'release']
+    
+    allParams.forEach(paramId => {
+      const paramLabel = document.querySelector(`label[for="${paramId}"]`)
+      if (paramLabel) {
+        if (isConsistentMode) {
+          paramLabel.innerHTML = `${this.getParamDisplayName(paramId)} <small>(DeterministicPluckSynth)</small>`
+        } else {
+          paramLabel.innerHTML = `${this.getParamDisplayName(paramId)} <small>(PluckSynth)</small>`
+        }
+      }
+    })
+  }
+  
+  private getParamDisplayName(paramId: string): string {
+    switch(paramId) {
+      case 'attackNoise': return 'Attack Noise';
+      case 'dampening': return 'Dampening';
+      case 'resonance': return 'Resonance';
+      case 'release': return 'Release';
+      default: return paramId.charAt(0).toUpperCase() + paramId.slice(1);
+    }
   }
 
   private updateStatus(message: string) {
