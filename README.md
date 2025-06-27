@@ -1,8 +1,8 @@
 # 🎹 CrystalHarp Sampler
 
-A modern web-based sample generator built with Tone.js and TypeScript. This project features the CrystalHarp synthesizer and provides real-time parameter control with offline audio rendering capabilities. CrystalHarp Sampler
+A modern web-based sample generator built with Tone.js and TypeScript. This project features the CrystalHarp synthesizer and provides real-time parameter control with offline audio rendering capabilities.
 
-A modern web-based sample generator built with Tone.js and TypeScript, designed for creating audio samples compatible with Ableton Live. This project features the CrystalHarp synthesizer and provides real-time parameter control with offline audio rendering capabilities.
+<!-- Updated: January 2025 - GitHub Pages deployment active -->
 
 ## 🌐 Live Demo
 
