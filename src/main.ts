@@ -124,8 +124,9 @@ class App {
             <p>Source code available on <a href="https://github.com/dampee/CrystalHarp-Sampler" target="_blank">GitHub</a></p>
             <p>Created by <strong>Damiaan</strong> • Built with Tone.js & TypeScript</p>
           </div>
-          <div class="contact">
-            <h3>💬 Get in Touch</h3>
+          <div class="credits">
+            <h3>� Credits & Inspiration</h3>
+            <p>Original idea by <strong><a href="https://soundcloud.com/svensson_dj" target="_blank">Benj</a></strong></p>
             <p>Created something cool? Let me know! <a href="https://github.com/dampee" target="_blank">@dampee</a></p>
           </div>
         </footer>

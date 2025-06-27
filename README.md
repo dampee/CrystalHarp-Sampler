@@ -146,6 +146,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
+- **Benj** ([SoundCloud](https://soundcloud.com/svensson_dj)) for the original idea and inspiration
 - **Tone.js** team for the amazing Web Audio library
 - The web audio community for pushing the boundaries of browser-based audio
 
