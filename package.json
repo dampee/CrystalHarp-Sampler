@@ -1,13 +1,13 @@
 {
-  "name": "tone-sample-generator",
+  "name": "crystalharp-sampler",
   "private": false,
   "version": "1.0.0",
-  "description": "A modern web-based sample generator built with Tone.js, featuring the CrystalHarp synthesizer for creating audio samples compatible with Ableton Live",
+  "description": "CrystalHarp Sampler - A modern web-based sample generator built with Tone.js, featuring the CrystalHarp synthesizer for creating audio samples compatible with Ableton Live",
   "type": "module",
-  "homepage": "https://YOUR_GITHUB_USERNAME.github.io/SampleGenerator",
+  "homepage": "https://dampee.github.io/CrystalHarp-Sampler",
   "repository": {
     "type": "git",
-    "url": "https://github.com/YOUR_GITHUB_USERNAME/SampleGenerator.git"
+    "url": "https://github.com/dampee/CrystalHarp-Sampler.git"
   },
   "keywords": [
     "tone.js",

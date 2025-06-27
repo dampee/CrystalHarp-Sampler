@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   // GitHub Pages configuration
-  base: '/SampleGenerator/',
+  base: '/CrystalHarp-Sampler/',
   
   build: {
     outDir: 'dist',
