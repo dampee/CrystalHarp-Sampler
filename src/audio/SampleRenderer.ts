@@ -12,7 +12,8 @@ export class SampleRenderer {
       resonance: number,
       release: number,
       delayTime: number,
-      delayFeedback: number
+      delayFeedback: number,
+      volume: number
     }
   ): Promise<Blob> {
     try {
@@ -23,7 +24,11 @@ export class SampleRenderer {
           delayTime: synthParams.delayTime,
           feedback: synthParams.delayFeedback,
           wet: 0.3
-        }).toDestination()
+        })
+
+        // Create gain node for volume control
+        const gainNode = new Tone.Gain(synthParams.volume).toDestination()
+        delay.connect(gainNode)
 
         // Create CrystalHarp synthesizer with current parameters
         const crystalHarp = new Tone.PluckSynth({

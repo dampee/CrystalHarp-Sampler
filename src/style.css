@@ -213,6 +213,16 @@ main {
   border-color: var(--primary-color);
 }
 
+/* Continuous play button active state */
+.btn.active {
+  background: var(--danger);
+  color: white;
+}
+
+.btn.active:hover {
+  background: #dc2626;
+}
+
 .playback-controls {
   display: grid;
   gap: 1.5rem;
@@ -264,6 +274,49 @@ main {
   color: var(--text-secondary);
 }
 
+/* Attribution Footer */
+.attribution {
+  margin-top: 4rem;
+  padding: 2rem;
+  background: var(--surface);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.attribution h3 {
+  color: var(--primary-color);
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.attribution p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.attribution a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.attribution a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+.attribution strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .sample-generator {
@@ -286,6 +339,11 @@ main {
   .controls-section,
   .playback-section {
     padding: 1.5rem;
+  }
+
+  .attribution {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 

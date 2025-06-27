@@ -3,6 +3,7 @@ import * as Tone from 'tone'
 export class SampleGenerator {
   private crystalHarp: Tone.PluckSynth
   private delay: Tone.FeedbackDelay
+  private gainNode: Tone.Gain
   private isInitialized: boolean = false
 
   constructor() {
@@ -11,7 +12,11 @@ export class SampleGenerator {
       delayTime: 0.25,
       feedback: 0.3,
       wet: 0.3
-    }).toDestination()
+    })
+
+    // Initialize gain node for volume control
+    this.gainNode = new Tone.Gain(1).toDestination()
+    this.delay.connect(this.gainNode)
 
     // Initialize CrystalHarp synthesizer as provided by user
     this.crystalHarp = new Tone.PluckSynth({
@@ -68,6 +73,11 @@ export class SampleGenerator {
     }
   }
 
+  updateVolume(value: number): void {
+    if (!this.isInitialized) return
+    this.gainNode.gain.value = value
+  }
+
   getSynth(): Tone.PluckSynth {
     return this.crystalHarp
   }
@@ -79,6 +89,7 @@ export class SampleGenerator {
   dispose(): void {
     this.crystalHarp.dispose()
     this.delay.dispose()
+    this.gainNode.dispose()
     this.isInitialized = false
   }
 }
