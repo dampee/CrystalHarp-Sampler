@@ -28,8 +28,8 @@ class App {
     app.innerHTML = `
       <div class="sample-generator">
         <header>
-          <h1>🎵 Tone.js Sample Generator</h1>
-          <p>Generate audio samples for Ableton Live</p>
+          <h1>� CrystalHarp Sampler</h1>
+          <p>Generate high-quality audio samples with CrystalHarp</p>
         </header>
         
         <main>

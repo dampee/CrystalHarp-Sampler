@@ -1,4 +1,6 @@
-# � CrystalHarp Sampler
+# 🎹 CrystalHarp Sampler
+
+A modern web-based sample generator built with Tone.js and TypeScript. This project features the CrystalHarp synthesizer and provides real-time parameter control with offline audio rendering capabilities. CrystalHarp Sampler
 
 A modern web-based sample generator built with Tone.js and TypeScript, designed for creating audio samples compatible with Ableton Live. This project features the CrystalHarp synthesizer and provides real-time parameter control with offline audio rendering capabilities.
 
@@ -12,7 +14,7 @@ A modern web-based sample generator built with Tone.js and TypeScript, designed 
 - **🔧 Real-time Parameter Control**: Interactive sliders for tweaking sound parameters
 - **🎚️ Effect Processing**: Built-in delay effect with feedback control
 - **🎼 Offline Sample Generation**: Generate perfect quality samples using Tone.js offline rendering
-- **💾 Sample Export**: Download samples as WAV files for use in DAWs
+- **💾 Sample Export**: Download samples as WAV files for use in music production
 - **🎨 Modern UI**: Beautiful, responsive interface with dark theme
 - **🚀 Fast Development**: Built with Vite for lightning-fast hot reload
 
@@ -37,7 +39,7 @@ A modern web-based sample generator built with Tone.js and TypeScript, designed 
 
    ```bash
    git clone <repository-url>
-   cd SampleGenerator
+   cd CrystalHarp-Sampler
    ```
 
 2. Install dependencies:
@@ -56,9 +58,7 @@ A modern web-based sample generator built with Tone.js and TypeScript, designed 
 
 ## 🌐 Live Demo
 
-**[Try the live application on GitHub Pages!](https://yourusername.github.io/SampleGenerator)**
-
-> *Replace `yourusername` with the actual GitHub username where this is deployed*
+**[Try the live application on GitHub Pages!](https://dampee.github.io/CrystalHarp-Sampler)**
 
 ## 🚀 Deploy to GitHub Pages
 
@@ -110,18 +110,6 @@ const crystalHarp = new Tone.PluckSynth({
 
 This creates a beautiful, crystalline harp-like sound perfect for ambient music, sound design, and musical production.
 
-## 🔮 Future: Ableton Live Plugin
-
-This project is designed to eventually become an Ableton Live plugin using Max for Live. The web interface serves as a prototype and testing ground for the synthesizer parameters and effects chain.
-
-### Max for Live Integration Goals
-
-- Port CrystalHarp synthesizer to Max for Live
-- Create native Ableton Live device interface
-- Add MIDI control and automation
-- Implement preset management
-- Add advanced modulation options
-
 ## 🏗️ Project Structure
 
 ```
@@ -159,7 +147,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - **Tone.js** team for the amazing Web Audio library
-- **Ableton Live** for inspiration in music production tools
 - The web audio community for pushing the boundaries of browser-based audio
 
 ## 🐛 Known Issues

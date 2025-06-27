@@ -4,12 +4,11 @@
 
 ## Project Context
 
-This is a Tone.js-based sample generator project that creates audio samples for use in Ableton Live. The project focuses on:
+This is a CrystalHarp Sampler project that creates high-quality audio samples using Tone.js. The project focuses on:
 
 - Creating synthesized audio samples using Tone.js
 - Providing a web-based interface for parameter control
-- Exporting audio samples in formats compatible with Ableton Live
-- Future integration as an Ableton Live plugin (Max for Live device)
+- Exporting audio samples in high-quality formats
 
 ## Key Technologies
 
